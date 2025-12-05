@@ -123,23 +123,39 @@ let currentInput = "";
 
 buttons.forEach(button => {
   button.addEventListener("click", () => {
-    const btnValue = button.textContent;
+    let btnValue = button.textContent;
 
     if (btnValue === "=") {
-      // Calculate result
-      const expression = currentInput.replace(/x/g, "*");
+      // Replace symbols with JS syntax
+      let expression = currentInput
+        .replace(/x/g, "*")
+        .replace(/π/g, "Math.PI")
+        .replace(/\^/g, "**")
+        .replace(/√/g, "Math.sqrt");
+
       try {
         currentInput = eval(expression);
       } catch {
         currentInput = "Error";
       }
       display.value = currentInput;
+
     } else if (btnValue === "C") {
-      // Clear display
       currentInput = "";
       display.value = "";
+
+    } else if (btnValue === "√") {
+      // Insert Math.sqrt(
+      currentInput += "√(";
+      display.value = currentInput;
+
+    } else if (btnValue === "π") {
+      // Insert π text (converted to number before eval)
+      currentInput += "π";
+      display.value = currentInput;
+
     } else {
-      // Append number/operator
+      // Default append
       currentInput += btnValue;
       display.value = currentInput;
     }
