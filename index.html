@@ -149,10 +149,10 @@ buttons.forEach(button => {
       currentInput = "";
       display.value = "";
 
-    } else if (btnValue === "√") {
-      // Insert Math.sqrt(
-      currentInput += "√";
-      display.value = currentInput;
+   } else if (btnValue === "√") {
+  currentInput += "Math.sqrt(";
+  display.value = currentInput;
+  display.scrollLeft = display.scrollWidth;
 
     } else if (btnValue === "π") {
       // Insert π text (converted to number before eval)
