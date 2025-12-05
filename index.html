@@ -122,17 +122,26 @@
 
 // ALL JAVASCRIPT IS AI GENERATED 
 
+<script>
+
 const display = document.getElementById("display");
 const buttons = document.querySelectorAll(".container button");
 
-let displayInput = "";     // what the user sees
-let internalInput = "";    // what eval() uses
+let displayInput = "";     // user sees this
+let internalInput = "";    // eval uses this
 
 buttons.forEach(button => {
   button.addEventListener("click", () => {
     let btnValue = button.textContent;
 
     if (btnValue === "=") {
+
+      // Auto-close any missing parentheses from Math.sqrt(
+      const opens = (internalInput.match(/Math\.sqrt\(/g) || []).length;
+      const closes = (internalInput.match(/\)/g) || []).length;
+      const missing = opens - closes;
+      if (missing > 0) internalInput += ")".repeat(missing);
+
       let expression = internalInput
         .replace(/x/g, "*")
         .replace(/π/g, "Math.PI")
@@ -151,34 +160,43 @@ buttons.forEach(button => {
       display.scrollLeft = display.scrollWidth;
 
     } else if (btnValue === "C") {
+
       displayInput = "";
       internalInput = "";
       display.value = "";
 
     } else if (btnValue === "√") {
-      // Display pretty sqrt
+
+      // Display only shows √
       displayInput += "√";
 
-      // Internally use Math.sqrt(
+      // Internal adds the actual JS function
       internalInput += "Math.sqrt(";
 
       display.value = displayInput;
       display.scrollLeft = display.scrollWidth;
 
     } else if (btnValue === "π") {
+
       displayInput += "π";
       internalInput += "Math.PI";
+
       display.value = displayInput;
       display.scrollLeft = display.scrollWidth;
 
     } else {
+
       displayInput += btnValue;
       internalInput += btnValue;
+
       display.value = displayInput;
       display.scrollLeft = display.scrollWidth;
     }
   });
 });
+
+</script>
+
 
 
 </script>
