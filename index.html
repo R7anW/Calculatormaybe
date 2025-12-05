@@ -124,48 +124,62 @@
 
 const display = document.getElementById("display");
 const buttons = document.querySelectorAll(".container button");
-let currentInput = "";
+
+let displayInput = "";     // what the user sees
+let internalInput = "";    // what eval() uses
 
 buttons.forEach(button => {
   button.addEventListener("click", () => {
     let btnValue = button.textContent;
 
     if (btnValue === "=") {
-      // Replace symbols with JS syntax
-      let expression = currentInput
+      let expression = internalInput
         .replace(/x/g, "*")
         .replace(/π/g, "Math.PI")
-        .replace(/\^/g, "**")
-        .replace(/√/g, "Math.sqrt");
+        .replace(/\^/g, "**");
 
       try {
-        currentInput = eval(expression);
+        const result = eval(expression);
+        displayInput = result;
+        internalInput = result.toString();
       } catch {
-        currentInput = "Error";
+        displayInput = "Error";
+        internalInput = "";
       }
-      display.value = currentInput;
+
+      display.value = displayInput;
+      display.scrollLeft = display.scrollWidth;
 
     } else if (btnValue === "C") {
-      currentInput = "";
+      displayInput = "";
+      internalInput = "";
       display.value = "";
 
-   } else if (btnValue === "√") {
-  currentInput += "Math.sqrt(";
-  display.value = currentInput;
-  display.scrollLeft = display.scrollWidth;
+    } else if (btnValue === "√") {
+      // Display pretty sqrt
+      displayInput += "√(";
+
+      // Internally use Math.sqrt(
+      internalInput += "Math.sqrt(";
+
+      display.value = displayInput;
+      display.scrollLeft = display.scrollWidth;
 
     } else if (btnValue === "π") {
-      // Insert π text (converted to number before eval)
-      currentInput += "π";
-      display.value = currentInput;
+      displayInput += "π";
+      internalInput += "Math.PI";
+      display.value = displayInput;
+      display.scrollLeft = display.scrollWidth;
 
     } else {
-      // Default append
-      currentInput += btnValue;
-      display.value = currentInput;
+      displayInput += btnValue;
+      internalInput += btnValue;
+      display.value = displayInput;
+      display.scrollLeft = display.scrollWidth;
     }
   });
 });
+
 
 </script>
 
