@@ -51,10 +51,6 @@
       font-size: 100px;
       text-align: left;
       border: none;
-      overflow-x: auto;
-      overflow-y: hidden;
-      white-space: nowrap;
-      resize: none;
     }
 
     .container {
@@ -88,8 +84,7 @@
 </div>
 
 <div class="calculator">
-    <textarea class="display" id="display" readonly></textarea>
-
+    <input type="text" class="display" id="display" readonly>
 
     <div class="container">
 <button id="btnC">C</button>
@@ -122,82 +117,50 @@
 
 // ALL JAVASCRIPT IS AI GENERATED 
 
-<script>
-
 const display = document.getElementById("display");
 const buttons = document.querySelectorAll(".container button");
-
-let displayInput = "";     // user sees this
-let internalInput = "";    // eval uses this
+let currentInput = "";
 
 buttons.forEach(button => {
   button.addEventListener("click", () => {
     let btnValue = button.textContent;
 
     if (btnValue === "=") {
-
-      // Auto-close any missing parentheses from Math.sqrt(
-      const opens = (internalInput.match(/Math\.sqrt\(/g) || []).length;
-      const closes = (internalInput.match(/\)/g) || []).length;
-      const missing = opens - closes;
-      if (missing > 0) internalInput += ")".repeat(missing);
-
-      let expression = internalInput
+      // Replace symbols with JS syntax
+      let expression = currentInput
         .replace(/x/g, "*")
         .replace(/π/g, "Math.PI")
-        .replace(/\^/g, "**");
+        .replace(/\^/g, "**")
+        .replace(/√/g, "Math.sqrt");
 
       try {
-        const result = eval(expression);
-        displayInput = result;
-        internalInput = result.toString();
+        currentInput = eval(expression);
       } catch {
-        displayInput = "Error";
-        internalInput = "";
+        currentInput = "Error";
       }
-
-      display.value = displayInput;
-      display.scrollLeft = display.scrollWidth;
+      display.value = currentInput;
 
     } else if (btnValue === "C") {
-
-      displayInput = "";
-      internalInput = "";
+      currentInput = "";
       display.value = "";
 
     } else if (btnValue === "√") {
-
-      // Display only shows √
-      displayInput += "√";
-
-      // Internal adds the actual JS function
-      internalInput += "Math.sqrt(";
-
-      display.value = displayInput;
-      display.scrollLeft = display.scrollWidth;
+      // Insert Math.sqrt(
+      currentInput += "√(";
+      display.value = currentInput;
 
     } else if (btnValue === "π") {
-
-      displayInput += "π";
-      internalInput += "Math.PI";
-
-      display.value = displayInput;
-      display.scrollLeft = display.scrollWidth;
+      // Insert π text (converted to number before eval)
+      currentInput += "π";
+      display.value = currentInput;
 
     } else {
-
-      displayInput += btnValue;
-      internalInput += btnValue;
-
-      display.value = displayInput;
-      display.scrollLeft = display.scrollWidth;
+      // Default append
+      currentInput += btnValue;
+      display.value = currentInput;
     }
   });
 });
-
-</script>
-
-
 
 </script>
 
