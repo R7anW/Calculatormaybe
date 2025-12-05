@@ -91,23 +91,19 @@
 <button id="btn7">7</button> 
 <button id="btn8">8</button>
 <button id="btn9">9</button>
-<button id="btnPi">&#960;</button>
+<button id="btn/">/</button>
 <button id="btn4">4</button>
 <button id="btn5">5</button>
 <button id="btn6">6</button>
-<button id="btn^">^</button>
+<button id="btnx">x</button>
 <button id="btn1">1</button>
 <button id="btn2">2</button>
 <button id="btn3">3</button>
-<button id="btnsqr">&#x221A;</button>
+<button id="btn-">-</button>
 <button id="btn0">0</button>
 <button id="btn.">.</button>
 <button id="btn=">=</button>
-<button id="btn/">/</button>
-<button id="btnx">x</button>
 <button id="btn+">+</button>
-<button id="btn-">-</button>
-
 </div>
 </div>
 
@@ -117,56 +113,34 @@
 
 // ALL JAVASCRIPT IS AI GENERATED 
 
-// Updated calculator logic
-
-// Updated calculator logic
-
 const display = document.getElementById("display");
 const buttons = document.querySelectorAll(".container button");
 let currentInput = "";
 
 buttons.forEach(button => {
   button.addEventListener("click", () => {
-    let btnValue = button.textContent;
+    const btnValue = button.textContent;
 
     if (btnValue === "=") {
-      // Replace symbols with JS syntax
-      let expression = currentInput
-        .replace(/x/g, "*")
-        .replace(/π/g, "Math.PI")
-        .replace(/\^/g, "**")
-        .replace(/√/g, "Math.sqrt");
-
+      // Calculate result
+      const expression = currentInput.replace(/x/g, "*");
       try {
         currentInput = eval(expression);
       } catch {
         currentInput = "Error";
       }
       display.value = currentInput;
-
     } else if (btnValue === "C") {
+      // Clear display
       currentInput = "";
       display.value = "";
-
-    } else if (btnValue === "√") {
-      // Insert Math.sqrt(
-      currentInput += "√(";
-      display.value = currentInput;
-
-    } else if (btnValue === "π") {
-      // Insert π text (converted to number before eval)
-      currentInput += "π";
-      display.value = currentInput;
-
     } else {
-      // Default append
+      // Append number/operator
       currentInput += btnValue;
       display.value = currentInput;
     }
   });
 });
-
-
 
 </script>
 
