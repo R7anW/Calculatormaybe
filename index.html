@@ -40,18 +40,57 @@
         border: solid 5px rgb(187, 187, 187);
     }
 
-    .display {
-      width: 495px;
-      height: 150px;
-      background-color: rgb(58, 58, 58);
-      margin: auto;
-      border-top-left-radius: 15px;
-      border-top-right-radius: 15px;
-      color: white;
-      font-size: 100px;
-      text-align: left;
-      border: none;
-    }
+   .display {
+  width: 495px;
+  height: 150px;
+  background-color: rgb(58, 58, 58);
+  margin: auto;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  color: white;
+  font-size: 100px;
+  text-align: left;
+  border: none;
+
+  overflow-x: auto;       /* enable horizontal scroll */
+  overflow-y: hidden;
+  white-space: nowrap;    /* keep numbers on one line */
+  padding: 10px;
+
+  /* Prevents user highlight */
+  user-select: none;
+
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
+}
+
+/* Chrome / Edge / Safari */
+.display::-webkit-scrollbar {
+  height: 12px; 
+}
+
+.display::-webkit-scrollbar-track {
+  background: rgb(40, 40, 40);
+  border-radius: 10px;
+}
+
+.display::-webkit-scrollbar-thumb {
+  background: rgb(255, 188, 64);
+  border-radius: 10px;
+  border: 2px solid rgb(40, 40, 40);
+}
+
+.display::-webkit-scrollbar-thumb:hover {
+  background: rgb(221, 144, 0);
+  cursor: pointer;
+}
+
+/* Firefox */
+.display {
+  scrollbar-color: rgb(255, 188, 64) rgb(40, 40, 40);
+  scrollbar-width: thin;
+}
+
 
     .container {
       padding-top: 25px;
@@ -84,7 +123,7 @@
 </div>
 
 <div class="calculator">
-    <input type="text" class="display" id="display" readonly>
+    <div class="display" id="display"></div>
 
     <div class="container">
 <button id="btnC">C</button>
