@@ -5,11 +5,11 @@
 <title>Calculator</title>
   <style>
     body {
-      background-color: rgb(209, 209, 209);
+      background-color: rgb(189, 189, 189);
     }
 
     .whole_calc_gui {
-      padding-top: 100px;
+      padding-top: 150px;
     }
 
     .heading_wrapper {
@@ -18,7 +18,7 @@
 
     .centre_heading h1 {
       display: inline-block;
-      background-color: rgb(187, 187, 187);
+      background-color: rgb(92, 92, 92);
       font-size: 20px;
       padding-left: 20px;
       padding-right: 20px;
@@ -28,20 +28,22 @@
       text-align: center;
       margin-top: 0;
       margin-bottom: 0;
+      color: rgb(218, 218, 218);
+      user-select: none;
     }
 
     .calculator {
         text-align: center;
         width: 500px;
         height: 650px;
-        background-color: gray;
+        background-color: rgb(92, 92, 92);
         margin: auto;
         border-radius: 20px;
-        border: solid 5px rgb(187, 187, 187);
+        border: solid 5px rgb(92, 92, 92);
     }
 
     .display {
-      width: 495px;
+      width: 497px;
       height: 150px;
       background-color: rgb(58, 58, 58);
       margin: auto;
@@ -51,6 +53,7 @@
       font-size: 100px;
       text-align: left;
       border: none;
+      pointer-events: none;
     }
 
     .container {
@@ -62,7 +65,6 @@
       grid-template-columns: repeat(4, 1fr);
       grid-template-columns: repeat(4, 1fr);
       gap: 20px;
-
     }
 
     .container button {
@@ -70,6 +72,14 @@
       border-radius: 10px;
       font-size: 50px;
       background-color: rgb(221, 144, 0);
+    }
+
+    .container button:hover {
+        background-color: rgb(228, 178, 86);
+    }
+
+    .container button:active {
+        background-color: rgb(221, 185, 117);
     }
     
   </style>
