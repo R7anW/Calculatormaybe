@@ -43,21 +43,22 @@
     }
 
     .display {
-      width: 497px;
+      width: 347px;
       height: 150px;
       background-color: rgb(58, 58, 58);
       margin: auto;
       border-top-left-radius: 15px;
       border-top-right-radius: 15px;
       color: white;
-      font-size: 50px;
+      font-size: 70px;
       text-align: left;
       border: none;
       pointer-events: none;
+      padding-left: 150px;
+      
     }
 
     .container {
-      padding-top: 25px;
       margin: auto;
       width: 450px;
       height: 450px;
@@ -65,6 +66,7 @@
       grid-template-columns: repeat(4, 1fr);
       grid-template-columns: repeat(4, 1fr);
       gap: 20px;
+      padding-top: 20px;
     }
 
     .container button {
@@ -72,6 +74,7 @@
       border-radius: 10px;
       font-size: 50px;
       background-color: rgb(221, 144, 0);
+      user-select: none;
     }
 
     .container button:hover {
@@ -82,6 +85,22 @@
         background-color: rgb(221, 185, 117);
     }
     
+    #btnC {
+        background-color: rgb(58, 58, 58);
+        border: none;
+        font-size: 120px;
+        position: absolute;
+        left: 730px;
+        top: 208px;
+        color: rgb(107, 107, 107);
+        
+    }
+
+    #btnC:hover {
+        color: rgb(143, 143, 143);
+    }
+
+
   </style>
 </head>
 <body>
@@ -95,6 +114,7 @@
 
 <div class="calculator">
     <input type="text" class="display" id="display" readonly>
+
 
     <div class="container">
 <button id="btnC">C</button>
